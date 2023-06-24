@@ -5,4 +5,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - 443:443
+    networks:
+      - mynetwork
+
+  mariadb:
+    build:
+      context:  ./mariadb
+      dockerfile : Dockerfile
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
 
