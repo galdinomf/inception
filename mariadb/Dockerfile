@@ -8,7 +8,9 @@ RUN echo "[mysqld] \n skip-networking=0 \n skip-bind-address" >> /etc/mysql/my.c
 RUN service mariadb start && \
 	mariadb -e \
 	"CREATE USER 'moacir'@'%'; \
-	 GRANT ALL ON mysql.user TO 'moacir'@'%';"
+	 GRANT ALL ON mysql.user TO 'moacir'@'%'; \
+	 GRANT CREATE USER ON *.* TO 'moacir'@'%'; \
+	 FLUSH PRIVILEGES;"
 
 RUN service mariadb stop
 

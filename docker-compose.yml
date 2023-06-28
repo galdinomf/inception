@@ -14,7 +14,17 @@ services:
       dockerfile : Dockerfile
     networks:
       - mynetwork
+    volumes:
+        - myvolume:/var/lib/mysql
 
 networks:
   mynetwork:
 
+
+volumes:
+  myvolume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mgaldino/data
