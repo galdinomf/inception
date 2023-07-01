@@ -7,6 +7,10 @@ services:
       - 443:443
     networks:
       - mynetwork
+    volumes:
+      - wordpress_volume:/var/www/html/wordpress
+    depends_on:
+      - wordpress
 
   mariadb:
     build:
@@ -15,16 +19,36 @@ services:
     networks:
       - mynetwork
     volumes:
-        - myvolume:/var/lib/mysql
+        - mariadb_volume:/var/lib/mysql
+
+  wordpress:
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
+    networks:
+      mynetwork:
+        aliases:
+          - wordpress
+    volumes:
+      - wordpress_volume:/var/www/html/wordpress
+    depends_on:
+      - mariadb
 
 networks:
   mynetwork:
 
 
 volumes:
-  myvolume:
+  mariadb_volume:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/mgaldino/data
+      device: /home/mgaldino/data/db
+
+  wordpress_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mgaldino/data/wordpress
