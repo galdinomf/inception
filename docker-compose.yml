@@ -17,7 +17,9 @@ services:
       context:  ./mariadb
       dockerfile : Dockerfile
     networks:
-      - mynetwork
+      mynetwork:
+        aliases:
+          - mariadb
     volumes:
         - mariadb_volume:/var/lib/mysql
 
