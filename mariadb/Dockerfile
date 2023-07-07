@@ -10,6 +10,7 @@ RUN service mariadb start && \
 	"CREATE DATABASE IF NOT EXISTS wordpress_database; \
 	 CREATE USER 'moa'@'%'; \
 	 GRANT ALL ON mysql.user TO 'moa'@'%' IDENTIFIED BY 'banana'; \
+	 GRANT ALL ON wordpress_database.* TO 'moa'@'%' IDENTIFIED BY 'banana'; \
 	 GRANT CREATE USER ON *.* TO 'moa'@'%' IDENTIFIED BY 'banana'; \
 	 FLUSH PRIVILEGES;"
 
