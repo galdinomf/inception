@@ -39,7 +39,6 @@ services:
 networks:
   mynetwork:
 
-
 volumes:
   mariadb_volume:
     driver: local
