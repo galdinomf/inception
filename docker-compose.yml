@@ -1,16 +1,4 @@
 services:
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - 443:443
-    networks:
-      - mynetwork
-    volumes:
-      - wordpress_volume:/var/www/html/wordpress
-    depends_on:
-      - wordpress
 
   mariadb:
     build:
@@ -35,6 +23,19 @@ services:
       - wordpress_volume:/var/www/html/wordpress
     depends_on:
       - mariadb
+  
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    networks:
+      - mynetwork
+    volumes:
+      - wordpress_volume:/var/www/html/wordpress
+    depends_on:
+      - wordpress
 
 networks:
   mynetwork:

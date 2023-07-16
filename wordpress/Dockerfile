@@ -9,8 +9,17 @@ RUN apt update && apt install php-fpm php-mysql mariadb-client -y && apt install
 RUN sed -i "/^listen\s=.*/c\listen = 0.0.0.0:9000" \
 	/etc/php/[0-9]*.[0-9]*/fpm/pool.d/www.conf
 
-COPY wp-config.php /var/www/html/wordpress/
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp && cd wordpress && \
+	wp core config --dbname=wordpress_database --dbuser=moa --dbpass=banana --dbhost=mariadb --skip-check --allow-root	
 
 RUN mkdir -p /run/php/
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
+
 
 CMD ["php-fpm7.4", "-F"]
