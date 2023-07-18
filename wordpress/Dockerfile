@@ -9,10 +9,14 @@ RUN apt update && apt install php-fpm php-mysql mariadb-client -y && apt install
 RUN sed -i "/^listen\s=.*/c\listen = 0.0.0.0:9000" \
 	/etc/php/[0-9]*.[0-9]*/fpm/pool.d/www.conf
 
+ARG WP_DATABASE
+ARG WP_DBUSER
+ARG WP_DBPASSWORD
+
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp && cd wordpress && \
-	wp core config --dbname=wordpress_database --dbuser=moa --dbpass=banana --dbhost=mariadb --skip-check --allow-root	
+	wp core config --dbname=$WP_DATABASE --dbuser=$WP_DBUSER --dbpass=$WP_DBPASSWORD --dbhost=mariadb --skip-check --allow-root	
 
 RUN mkdir -p /run/php/
 
