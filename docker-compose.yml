@@ -23,6 +23,12 @@ services:
           - WP_DATABASE=${WP_DATABASE}
           - WP_DBUSER=${WP_DBUSER}
           - WP_DBPASSWORD=${WP_DBPASSWORD}
+          - WP_ADMUSER=${WP_ADMUSER}
+          - WP_ADMPASSWORD=${WP_ADMPASSWORD}
+          - WP_ADMEMAIL=${WP_ADMEMAIL}
+          - WP_USERNAME=${WP_USERNAME}
+          - WP_USERPASSWORD=${WP_USERPASSWORD}
+          - WP_USEREMAIL=${WP_USEREMAIL}
     networks:
       mynetwork:
         aliases:
