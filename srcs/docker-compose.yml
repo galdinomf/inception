@@ -16,6 +16,7 @@ services:
         - mariadb_volume:/var/lib/mysql
     expose:
         - "3306"
+    image: "mariadb"
 
   wordpress:
     build:
@@ -42,6 +43,7 @@ services:
       - mariadb
     expose:
         - "9000"
+    image: "wordpress"
   
   nginx:
     build:
@@ -55,6 +57,7 @@ services:
       - wordpress_volume:/var/www/html/wordpress
     depends_on:
       - wordpress
+    image: "nginx"
 
 networks:
   mynetwork:
