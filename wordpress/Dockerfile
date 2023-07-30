@@ -18,6 +18,7 @@ ARG WP_ADMEMAIL
 ARG WP_USERNAME
 ARG WP_USERPASSWORD
 ARG WP_USEREMAIL
+ARG WP_DBHOST
 
 ENV WP_DATABASE=$WP_DATABASE
 ENV WP_DBUSER=$WP_DBUSER
@@ -28,11 +29,12 @@ ENV WP_ADMEMAIL=$WP_ADMEMAIL
 ENV WP_USERNAME=$WP_USERNAME
 ENV WP_USERPASSWORD=$WP_USERPASSWORD
 ENV WP_USEREMAIL=$WP_USEREMAIL
+ENV WP_DBHOST=$WP_DBHOST
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp && cd wordpress && \
-	wp core config --dbname=$WP_DATABASE --dbuser=$WP_DBUSER --dbpass=$WP_DBPASSWORD --dbhost=mariadb --skip-check --allow-root	
+	wp core config --dbname=$WP_DATABASE --dbuser=$WP_DBUSER --dbpass=$WP_DBPASSWORD --dbhost=$WP_DBHOST --skip-check --allow-root	
 
 RUN mkdir -p /run/php/
 

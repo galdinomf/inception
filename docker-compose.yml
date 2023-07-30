@@ -14,6 +14,8 @@ services:
           - mariadb
     volumes:
         - mariadb_volume:/var/lib/mysql
+    expose:
+        - "3306"
 
   wordpress:
     build:
@@ -23,6 +25,7 @@ services:
           - WP_DATABASE=${WP_DATABASE}
           - WP_DBUSER=${WP_DBUSER}
           - WP_DBPASSWORD=${WP_DBPASSWORD}
+          - WP_DBHOST=${WP_DBHOST}
           - WP_ADMUSER=${WP_ADMUSER}
           - WP_ADMPASSWORD=${WP_ADMPASSWORD}
           - WP_ADMEMAIL=${WP_ADMEMAIL}
@@ -37,6 +40,8 @@ services:
       - wordpress_volume:/var/www/html/wordpress
     depends_on:
       - mariadb
+    expose:
+        - "9000"
   
   nginx:
     build:
