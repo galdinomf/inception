@@ -38,7 +38,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 RUN mkdir -p /run/php/
 
-COPY entrypoint.sh .
+COPY ./conf/entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
