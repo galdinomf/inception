@@ -13,7 +13,7 @@ folders:
 	mkdir -p /home/mgaldino/data/wordpress
 
 address:
-	sed -i '/127.0.0.1/{ /mgaldino\.42\.fr/! s/ mgaldino\.42\.fr/ /; }' /etc/hosts
+	sed -i '/^127\.0\.0\.1/ s/localhost/localhost mgaldino\.42\.fr/' /etc/hosts
 	sed -i '/::1/{ /mgaldino\.42\.fr/! s/ mgaldino\.42\.fr/ /; }' /etc/hosts
 
 
