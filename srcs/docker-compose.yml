@@ -1,3 +1,5 @@
+x-docker-compose-project-name: inception
+
 services:
 
   mariadb:
@@ -17,6 +19,7 @@ services:
     expose:
         - "3306"
     image: "mariadb"
+    container_name: inception_mariadb
 
   wordpress:
     build:
@@ -44,6 +47,7 @@ services:
     expose:
         - "9000"
     image: "wordpress"
+    container_name: inception_wordpress
   
   nginx:
     build:
@@ -58,9 +62,11 @@ services:
     depends_on:
       - wordpress
     image: "nginx"
+    container_name: inception_nginx
 
 networks:
   mynetwork:
+    name: inception_network 
 
 volumes:
   mariadb_volume:
@@ -69,6 +75,7 @@ volumes:
       type: none
       o: bind
       device: /home/mgaldino/data/db
+    name: mariadb_volume
 
   wordpress_volume:
     driver: local
@@ -76,3 +83,4 @@ volumes:
       type: none
       o: bind
       device: /home/mgaldino/data/wordpress
+    name: wordpress_volume
